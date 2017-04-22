@@ -36,6 +36,7 @@ app.use((req, res, next)=>{
 var configRoutes = require('./router');
 configRoutes(app);
 
-app.listen(3000, (req, res)=>{
-    console.log('server listening at port 3000');
+app.set('port', (process.env.PORT || 3000));
+app.listen(app.get('port'), ()=>{
+    console.log('server listening at port ' + app.get('port'));
 });
