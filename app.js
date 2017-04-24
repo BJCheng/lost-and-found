@@ -10,22 +10,22 @@ var flash = require('connect-flash');
 
 // view engine
 app.set('view engine', 'handlebars');
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 
 // middlewares
 app.use('/public', static);
 
 app.use(expressValidator());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-    secret: 'lostAndFoundSecrest', 
-    saveUninitialized: true, 
+    secret: 'lostAndFoundSecrest',
+    saveUninitialized: true,
     resave: true
 }));
 app.use(flash());
 
 //global var
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.err_msg = req.flash('err_msg');
     res.locals.msg = req.flash('msg');
@@ -37,6 +37,6 @@ var configRoutes = require('./router');
 configRoutes(app);
 
 app.set('port', (process.env.PORT || 3000));
-app.listen(app.get('port'), ()=>{
+app.listen(app.get('port'), () => {
     console.log('server listening at port ' + app.get('port'));
 });

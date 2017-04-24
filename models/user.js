@@ -28,3 +28,4 @@ function sendMessage(){
 exports.insertOne = insertOne
 exports.receiveMessage = receiveMessage
 exports.sendMessage = sendMessage
+exports.findOne = findOne;
