@@ -7,6 +7,7 @@ var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
+var passport = require('passport');
 
 // view engine
 app.set('view engine', 'handlebars');
@@ -14,7 +15,6 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 
 // middlewares
 app.use('/public', static);
-
 app.use(expressValidator());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
@@ -23,6 +23,8 @@ app.use(session({
     resave: true
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //global var
 app.use((req, res, next) => {

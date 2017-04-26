@@ -38,6 +38,11 @@
                         <label>{{err_msg}}</label>
                     </div>
                 {{/if}} 
+                {{#if msg}}
+                    <div class="alert alert-danger">
+                        <label>{{msg}}</label>
+                    </div>
+                {{/if}} 
                 {{{body}}}
             </div>
         </div>
