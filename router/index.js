@@ -3,6 +3,7 @@ var loginRouter = require('./login');
 var registerRouter = require('./register');
 var logoutRouter = require('./logout');
 var homeRouter = require('./home');
+var mapRouter = require('./map');
 
 let configRoutes = (app) => {
     app.use('/', homeRouter);
@@ -11,6 +12,7 @@ let configRoutes = (app) => {
     app.use('/login', loginRouter);
     app.use('/register', registerRouter);
     app.use('/logout', logoutRouter);
+    app.use('/map', mapRouter);
 }
 
 module.exports = configRoutes;
