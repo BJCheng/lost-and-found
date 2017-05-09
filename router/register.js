@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
     res.render('register');
 });
 router.post('/', (req, res) => {
+    res.send(JSON.stringify(req.body));
     req.checkBody('name', 'User name is empty.').notEmpty();
     req.checkBody('phone', 'Mobile phone number is empty.').notEmpty();
     req.checkBody('phone', 'Mobile phone number has wrong format.').isMobilePhone('en-US');

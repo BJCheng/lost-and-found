@@ -31,7 +31,7 @@ passport.use(new localStrategy((username, password, done) => {
         
         return userModel.confirmPassword(user, password).then((user)=>{
             if(!user)
-               return done(null, false, { message: 'Username Not Found' }); 
+               return done(null, false, { message: 'Password Not Matched' }); 
             else
                 return done(null, user);
         });
