@@ -71,9 +71,11 @@
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
               map: resultsMap,
+              animation: google.maps.Animation.DROP,
               position: results[0].geometry.location,
               title:'Lost Location'
             });
+            marker.setMap(map);
             marker.addListener('click', function() {
             infoWindow.open(map, marker);
             });
