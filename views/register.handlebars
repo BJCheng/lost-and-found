@@ -1,34 +1,34 @@
 <main>
-    <header><h1 class="page-header">Register</h1></header>
+    <header>
+        <h1 class="page-header">Register</h1>
+    </header>
 
-    {{#if errors}}
-        {{#each errors}}
-        <div class="alert alert-danger">{{msg}}</div>
-        {{/each}}
-    {{/if}}
+    {{#if errors}} {{#each errors}}
+    <div class="alert alert-danger">{{msg}}</div>
+    {{/each}} {{/if}}
 
     <form action="register" method="post">
         <div class="form-group">
             <label for="phone">Name</label>
-            <input type="" id="name" name="name" class="form-control" value="Mr.A"/>
+            <input type="" id="name" name="name" class="form-control" value="Mr.A" />
         </div>
         <div class="form-group">
             <label for="email">E-mail Address</label>
-            <input type="email" id="email" name="email" class="form-control" value="1@1.com"/>
+            <input type="email" id="email" name="email" class="form-control" value="1@1.com" />
         </div>
         <div class="form-group">
             <label for="phone">Mobile Phone</label>
-            <input type="" id="phone" name="phone" class="form-control" value="9089383973"/>
+            <input type="" id="phone" name="phone" class="form-control" value="9089383973" />
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" value="1"/>
+            <input type="password" id="password" name="password" class="form-control" value="1" />
         </div>
         <div class="form-group">
             <label for="password2">Password2</label>
-            <input type="password" id="password2" name="password2" class="form-control" value="1"/>
+            <input type="password" id="password2" name="password2" class="form-control" value="1" />
         </div>
-        
+
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </main>
