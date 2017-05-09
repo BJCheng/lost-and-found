@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var exphbs = require('express-handlebars');
 var static = express.static('public');
-var googleapis = require('googleapis');
+var staticView = express.static('views');
+// var googleapis = require('googleapis');
 
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
@@ -16,6 +17,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 
 // middlewares
 app.use('/public', static);
+app.use('/views', staticView);
 app.use(expressValidator());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
