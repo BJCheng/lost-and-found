@@ -33,7 +33,7 @@ function findFoundById(_id){
 
 function findFounds(){
     return mongoCollection.getFoundCollection.then((collection)=>{
-        return collection.findOne({});
+        return collection.find({}).toArray();
     }).catch((err)=>{
         throw err;
     });
