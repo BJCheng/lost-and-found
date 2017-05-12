@@ -26,3 +26,16 @@ $(function () {
     })
     return false;
 });
+
+$(function () {
+    var tabFound = $("#tabLost");
+    tabFound.click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href')
+        }).then(function(res){
+            $("#tabContent").html(res);
+        })
+    })
+    return false;
+});
