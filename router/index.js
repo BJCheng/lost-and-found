@@ -4,6 +4,7 @@ var registerRouter = require('./register');
 var logoutRouter = require('./logout');
 var homeRouter = require('./home');
 var mapRouter = require('./map');
+var foundRouter = require('./found');
 
 let configRoutes = (app) => {
     app.use('/', homeRouter);
@@ -13,6 +14,7 @@ let configRoutes = (app) => {
     app.use('/register', registerRouter);
     app.use('/logout', logoutRouter);
     app.use('/map', mapRouter);
+    app.use('/found', foundRouter);
 }
 
 module.exports = configRoutes;

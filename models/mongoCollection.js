@@ -18,4 +18,4 @@ function getCollection(collectionName){
 
 exports.getUserCollection = getCollection('users');
 exports.getLostCollection = getCollection('losts');
-exports.getFoundCollection = getCollection('founds');
+exports.getFoundCollection = getCollection('found');

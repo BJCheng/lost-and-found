@@ -13,3 +13,16 @@ $(function () {
         return false;
     });
 });
+
+$(function () {
+    var tabFound = $("#tabFound");
+    tabFound.click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: $(this).attr('href')
+        }).then(function(res){
+            $("#tabContent").html(res);
+        })
+    })
+    return false;
+});
