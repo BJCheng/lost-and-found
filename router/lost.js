@@ -11,4 +11,12 @@ router.get('/', (req, res)=>{
     });
 });
 
+router.get("/:id", (req, res) => {
+    lostModel.findLostById(req.params.id).then((found) => {
+        res.render('lost-detail', { found: found });
+    }).catch(() => {
+        res.status(404).json({ error: "Data not found" });
+    });
+});
+
 module.exports = router;
