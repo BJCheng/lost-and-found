@@ -1,0 +1,35 @@
+<main>
+    <header><h2 class="page-header">Lost</h2></header>
+    <form role="form">
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+        <a class="glyphicon glyphicon-arrow-left" aria-hidden="true" href="/">Return</a>
+        </button>
+    <fieldset disabled>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" class="form-control" type="text" placeholder="title" value="{{found.title}}" >
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input id="description" class="form-control" type="text" placeholder="description" value="{{found.description}}">
+        </div>
+        <div class="form-group">
+            <label for="timestamp">Time</label>
+            <input id="timestamp" class="form-control" type="text" placeholder="timestamp" value="{{found.timestamp}}">
+        </div>
+        <div class="form-group">
+            <label for="solved">Solved</label>
+            <input id="solved" class="form-control" type="text" placeholder="solved" value="{{found.solved}}">
+        </div>
+
+        {{#each found.comments}}
+        <div class="alert alert-info" role="alert">
+            <label>PosterId: {{posterId}}</label>
+            <br/>
+            <label>Comment: {{comment}}</label>
+            <label>@{{timestamp}}</label>
+        </div>
+        {{/each}}
+    </fieldset>
+    </form>
+</main>
