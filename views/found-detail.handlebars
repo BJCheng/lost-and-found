@@ -40,6 +40,9 @@
             <h4>Login and leave the first comment.<h4>
             {{/if}}
         </div>
+        {{#if errors}} {{#each errors}}
+            <div class="alert alert-danger">{{msg}}</div>
+        {{/each}} {{/if}}
     </fieldset>
     </form>
     <form method="POST">
