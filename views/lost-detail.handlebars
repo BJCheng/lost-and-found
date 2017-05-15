@@ -1,35 +1,57 @@
 <main>
     <header><h2 class="page-header">Lost</h2></header>
+    <form style="display: inline" action="/" method="get">
+        <button type="submit" class="btn btn-default" aria-label="Left Align">Return</button>
+    </form>
     <form role="form">
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-        <a class="glyphicon glyphicon-arrow-left" aria-hidden="true" href="/">Return</a>
-        </button>
     <fieldset disabled>
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" class="form-control" type="text" placeholder="title" value="{{found.title}}" >
+            <input id="title" class="form-control" type="text" placeholder="title" value="{{lost.title}}" >
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input id="description" class="form-control" type="text" placeholder="description" value="{{found.description}}">
+            <input id="description" class="form-control" type="text" placeholder="description" value="{{lost.description}}">
         </div>
         <div class="form-group">
             <label for="timestamp">Time</label>
-            <input id="timestamp" class="form-control" type="text" placeholder="timestamp" value="{{found.timestamp}}">
+            <input id="timestamp" class="form-control" type="text" placeholder="timestamp" value="{{lost.timestamp}}">
         </div>
         <div class="form-group">
             <label for="solved">Solved</label>
-            <input id="solved" class="form-control" type="text" placeholder="solved" value="{{found.solved}}">
+            <input id="solved" class="form-control" type="text" placeholder="solved" value="{{lost.solved}}">
         </div>
 
-        {{#each found.comments}}
-        <div class="alert alert-info" role="alert">
-            <label>PosterId: {{posterId}}</label>
-            <br/>
-            <label>Comment: {{comment}}</label>
-            <label>@{{timestamp}}</label>
+        <h4>Comments:</h4>
+        <div class="comment-div">
+            {{#if lost.comments}}
+            {{#each lost.comments}}
+            <div class="alert alert-info" role="alert">
+                <label>PosterId: {{posterId}}</label>
+                <br/>
+                <label>Comment: {{comment}}</label>
+                <label>@{{timestamp}}</label>
+            </div>
+            {{/each}}
+            {{else}}
+            <h4>Login and leave the first comment.<h4>
+            {{/if}}
         </div>
-        {{/each}}
     </fieldset>
+    </form>
+    <form method="POST">
+    {{#if user}}
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" class="form-control" type="text" placeholder="comment">
+        </div>       
+        <button type="submit">Submit</button> 
+    {{else}}
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" class="form-control" type="text" placeholder="comment" disabled>
+        </div>       
+        <button type="submit" disabled>Submit</button> 
+    {{/if}}
     </form>
 </main>
