@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geocoding service</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <title>Search for up to 200 places with Radar Search</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -16,78 +15,91 @@
         margin: 0;
         padding: 0;
       }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
     </style>
-  </head>
-  <body>
-    <div id="floating-panel">
-      <input id="address" type="textbox" value="HOBOKEN, NJ">
-      <input id="submit" type="button" value="Please type the address">
-    </div>
-    <div id="map"></div>
     <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: {lat: 40.745, lng: -74.0255}
-        });
-        var geocoder = new google.maps.Geocoder();
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
+      var map;
+      var infoWindow;
+      var service;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.746203, lng: -74.025645},
+          zoom: 15,
+          styles: [{
+            stylers: [{ visibility: 'simplified' }]
+          }, {
+            elementType: 'labels',
+            stylers: [{ visibility: 'off' }]
+          }]
         });
+        var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">LOST LOCATION</h1>'+
+      '<div id="bodyContent">'+
+      '<p>Detail, <a href="http://localhost:3000/found/detail">'+
+      'DETAIL</a> '+
+      '.</p>'+
+      '</div>'+
+      '</div>';
+        infoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        service = new google.maps.places.PlacesService(map);
+
+        // The idle event is a debounced event, so we can query & listen without
+        // throwing too many requests at the server.
+        map.addListener('idle', performSearch);
       }
 
-      function geocodeAddress(geocoder, resultsMap) {
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Lost Location</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Lost Location: </b> This is just a test! </p>'+
-            '<p>Detail: <a href="http://localhost:3000/home">'+
-            'HOME</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-        var infoWindow = new google.maps.InfoWindow({
-        content: contentString
-        });
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              animation: google.maps.Animation.DROP,
-              position: results[0].geometry.location,
-              title:'Lost Location'
-            });
-            marker.setMap(map);
-            marker.addListener('click', function() {
-            infoWindow.open(map, marker);
-            });
-          } else {
-            alert('The address you type was not successful for the following reason: ' + status);
+      function performSearch() {
+        var request = {
+          bounds: map.getBounds(),
+          keyword: 'best view'
+        };
+        service.radarSearch(request, callback);
+      }
+
+      function callback(results, status) {
+        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+          console.error(status);
+          return;
+        }
+        for (var i = 0, result; result = results[i]; i++) {
+          addMarker(result);
+        }
+      }
+
+      function addMarker(place) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          icon: {
+            url: 'https://developers.google.com/maps/documentation/javascript/images/circle.png',
+            anchor: new google.maps.Point(10, 10),
+            scaledSize: new google.maps.Size(10, 17)
           }
         });
-      }
 
+        google.maps.event.addListener(marker, 'click', function() {
+          service.getDetails(place, function(result, status) {
+            if (status !== google.maps.places.PlacesServiceStatus.OK) {
+              console.error(status);
+              return;
+            }
+            //infoWindow.setContent(result.name);
+            infoWindow.open(map, marker);
+          });
+        });
+      }
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFg16_e6l58ng0MKq8AQ-xTV-qFvp7D-E&callback=initMap">
-    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFg16_e6l58ng0MKq8AQ-xTV-qFvp7D-E&callback=initMap&libraries=places,visualization" async defer></script>
   </body>
 </html>
