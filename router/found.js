@@ -36,16 +36,16 @@ router.post("/:id", (req, res) => {
 });
 
 router.post('/', (req, res)=>{
-    var postArticle = {};
-    postArticle.title = req.body.title;
-    postArticle.description = req.body.description;
-    postArticle.posterId = res.locals.user._id;
-    postArticle.pic = "";
-    postArticle.timestamp = dateFormat(new Date(), "UTC:dddd, mmmm dS, yyyy, h:MM:ss TT")
-    postArticle.comments = [];
-    postArticle.solved = false;
+    var article = {};
+    article.title = req.body.title;
+    article.description = req.body.description;
+    article.posterId = res.locals.user._id;
+    article.pic = "";
+    article.timestamp = dateFormat(new Date(), "UTC:dddd, mmmm dS, yyyy, h:MM:ss TT")
+    article.comments = [];
+    article.solved = false;
 
-    foundModel.insertOne(postArticle).then((result)=>{
+    foundModel.insertOne(article).then((result)=>{
         res.redirect('/home?found=true');  //trigger found tab click event
     }).catch((err)=>{
         res.send(err)

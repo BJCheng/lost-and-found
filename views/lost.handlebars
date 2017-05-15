@@ -1,4 +1,9 @@
 <main>
+	{{#if user}}
+	<button id="postLost" class="btn btn-primary" onclick="postArticle('lost')">Report A Lost</button>
+	{{else}}
+	<button id="postLost" class="btn btn-basic" onclick="askLoginFirst()">Report A Found</button>
+	{{/if}}
 	<div class="list-group">
 		{{#each lost}}
 		<a href="/lost/{{_id}}" class="list-group-item list-group-item-info">{{title}}</a>

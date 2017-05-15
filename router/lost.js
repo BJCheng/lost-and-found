@@ -35,4 +35,21 @@ router.post("/:id", (req, res) => {
     });
 });
 
+router.post('/', (req, res)=>{
+    var article = {};
+    article.title = req.body.title;
+    article.description = req.body.description;
+    article.posterId = res.locals.user._id;
+    article.pic = "";
+    article.timestamp = dateFormat(new Date(), "UTC:dddd, mmmm dS, yyyy, h:MM:ss TT")
+    article.comments = [];
+    article.solved = false;
+
+    lostModel.insertOne(article).then((result)=>{
+        res.redirect('/home');
+    }).catch((err)=>{
+        res.send(err)
+    });
+});
+
 module.exports = router;

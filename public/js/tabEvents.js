@@ -5,7 +5,7 @@ $(function () {
         $.ajax({
             url: $(this).attr('href')
             , success: function (response) {
-                var $iFrame = $('<iframe id="mapIFrame" height="400px" width="100%" frameBorder="0" allowfullscreen></iframe>');
+                var $iFrame = $('<iframe id="mapIFrame" height="600px" width="100%" frameBorder="0" allowfullscreen></iframe>');
                 $iFrame.attr('scrolling', 'no');
                 $iFrame.attr('src', 'views/googlemap.html');
                 $iFrame.append(response);
@@ -15,28 +15,24 @@ $(function () {
         })
         return false;
     });
-});
 
-$(function () {
     var tabFound = $("#tabFound");
     tabFound.click(function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href')
-        }).then(function(res){
+        }).then(function (res) {
             $("#tabContent").html(res);
         })
+        return false;
     })
-    return false;
-});
 
-$(function () {
     var tabFound = $("#tabLost");
     tabFound.click(function (event) {
         event.preventDefault();
         $.ajax({
             url: $(this).attr('href')
-        }).then(function(res){
+        }).then(function (res) {
             $("#tabContent").html(res);
         })
     })
