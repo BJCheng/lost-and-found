@@ -1,9 +1,9 @@
 <main>
     <header><h2 class="page-header">Found</h2></header>
+    <form style="display: inline" action="/" method="get">
+        <button type="submit" class="btn btn-default" aria-label="Left Align">Return</button>
+    </form>
     <form role="form">
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-        <a class="glyphicon glyphicon-arrow-left" aria-hidden="true" href="/">Return</a>
-        </button>
     <fieldset disabled>
         <div class="form-group">
             <label for="title">Title</label>
@@ -22,14 +22,36 @@
             <input id="solved" class="form-control" type="text" placeholder="solved" value="{{found.solved}}">
         </div>
 
-        {{#each found.comments}}
-        <div class="alert alert-info" role="alert">
-            <label>PosterId: {{posterId}}</label>
-            <br/>
-            <label>Comment: {{comment}}</label>
-            <label>@{{timestamp}}</label>
+        <h4>Comments:</h4>
+        <div class="comment-div">
+            {{#if found.comments}}
+            {{#each found.comments}}
+            <div class="alert alert-info" role="alert">
+                <label>PosterId: {{posterId}}</label>
+                <br/>
+                <label>Comment: {{comment}}</label>
+                <label>@{{timestamp}}</label>
+            </div>
+            {{/each}}
+            {{else}}
+            <h4>Login and leave the first comment.<h4>
+            {{/if}}
         </div>
-        {{/each}}
     </fieldset>
+    </form>
+    <form method="POST">
+    {{#if user}}
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" class="form-control" type="text" placeholder="comment">
+        </div>       
+        <button type="submit">Submit</button> 
+    {{else}}
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <input id="comment" name="comment" class="form-control" type="text" placeholder="comment" disabled>
+        </div>       
+        <button type="submit" disabled>Submit</button> 
+    {{/if}}
     </form>
 </main>

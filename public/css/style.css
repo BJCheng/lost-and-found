@@ -26,3 +26,9 @@
         line-height: 30px;
         padding-left: 10px;
       }
+
+.comment-div{
+  height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

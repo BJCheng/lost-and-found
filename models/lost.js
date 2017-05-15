@@ -17,6 +17,8 @@ function insertCommentById(_id, comment) {
         return lostCollection.update({ '_id': _id },
         {
         $push: { comments: comment }
+        }).then((insertedComment)=>{
+            return findLostById(_id);
         })
     });
 }
