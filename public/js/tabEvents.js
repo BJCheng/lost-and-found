@@ -5,9 +5,12 @@ $(function () {
         $.ajax({
             url: $(this).attr('href')
             , success: function (response) {
-                var withIFrame = '<iframe id="mapIFrame" height="400px" width="100%" frameBorder="0" scrolling="no" src="views/googlemap.html" allowfullscreen>'+response+'</iframe>';
+                var $iFrame = $('<iframe id="mapIFrame" height="400px" width="100%" frameBorder="0" allowfullscreen></iframe>');
+                $iFrame.attr('scrolling', 'no');
+                $iFrame.attr('src', 'views/googlemap.html');
+                $iFrame.append(response);
                 // alert(withIFrame);
-                $("#tabContent").html(withIFrame);
+                $("#tabContent").html($iFrame);
             }
         })
         return false;
