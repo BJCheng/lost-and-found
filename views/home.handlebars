@@ -6,4 +6,13 @@
         <li><a id="tabMap" href="/map">Map</a></li>
     </ul>
     <div id="tabContent"></div>
+    <script>
+        $(function(){
+            {{#if found}}
+            $('#tabFound').trigger('click');
+            {{else}}            
+            $('#tabLost').trigger('click');
+            {{/if}}
+        })
+    </script>
 </main>
