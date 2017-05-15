@@ -41,7 +41,16 @@ function findFounds(){
     });
 }
 
+function deleteById(id){
+    return mongoCollection.getFoundCollection.then((collection)=>{
+        return collection.deleteOne({'_id': id});
+    }).catch((err)=>{
+        throw err;
+    });
+}
+
 exports.insertOne = insertOne
 exports.insertCommentById = insertCommentById;
 exports.findFoundById = findFoundById;
-exports.findFounds = findFounds
+exports.findFounds = findFounds;
+exports.deleteById = deleteById;
