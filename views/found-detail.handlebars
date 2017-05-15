@@ -3,6 +3,9 @@
     <form style="display: inline" action="/" method="get">
         <button type="submit" class="btn btn-default" aria-label="Left Align">Return</button>
     </form>
+    {{#if user.isAdmin}}
+    <button class="btn btn-danger" aria-label="Left Align" onclick="sendDelete('found', '{{found._id}}')">Delete Article</button>
+    {{/if}}
     <form role="form">
     <fieldset disabled>
         <div class="form-group">

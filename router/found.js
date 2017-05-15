@@ -52,5 +52,13 @@ router.post('/', (req, res)=>{
     });
 });
 
+router.delete('/', (req, res)=>{
+    foundModel.deleteById(req.body.articleId).then((result)=>{
+        res.send({'redirect': '/home?found=true'});
+    }).catch((err)=>{
+        res.send(err)
+    });
+});
+
 
 module.exports = router;

@@ -41,7 +41,16 @@ function findLosts(){
     });
 }
 
+function deleteById(id){
+    return mongoCollection.getLostCollection.then((collection)=>{
+        return collection.deleteOne({'_id': id});
+    }).catch((err)=>{
+        throw err;
+    });
+}
+
 exports.insertOne = insertOne
 exports.insertCommentById = insertCommentById;
 exports.findLostById = findLostById;
-exports.findLosts = findLosts
+exports.findLosts = findLosts;
+exports.deleteById = deleteById;
