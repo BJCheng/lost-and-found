@@ -44,6 +44,7 @@ router.post("/:id", (req, res) => {
 router.post('/', (req, res)=>{
     req.checkBody('title', 'title is empty').notEmpty();
     req.checkBody('description', 'description is empty').notEmpty();
+    req.checkBody('location', 'location is empty').notEmpty();
         let errors = req.validationErrors();
     if (!errors) {
         var article = {};
@@ -51,6 +52,7 @@ router.post('/', (req, res)=>{
         article.description = req.body.description;
         article.posterId = res.locals.user._id;
         article.pic = "";
+        article.location = req.body.location;
         article.timestamp = dateFormat(new Date(), "UTC:dddd, mmmm dS, yyyy, h:MM:ss TT")
         article.comments = [];
         article.solved = false;

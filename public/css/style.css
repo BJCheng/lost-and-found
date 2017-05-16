@@ -32,3 +32,13 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.list-div{
+  height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.large-title{
+  font-size: x-large
+}

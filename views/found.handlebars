@@ -1,12 +1,15 @@
 <main>
+	<hr>
 	{{#if user}}
 	<button id="postFound" class="btn btn-primary" onclick="postArticle('found')">Report A Found</button>
 	{{else}}
 	<button id="postFound" class="btn btn-basic" onclick="askLoginFirst()">Report A Found</button>
 	{{/if}}
-	<div id="tabList" class="list-group">
+	<hr>
+	<div id="tabList" class="list-group list-div">
 		{{#each found}}
-		<a href="/found/{{_id}}" class="list-group-item list-group-item-info">{{title}}</a> 
+		<a href="/found/{{_id}}" class="list-group-item list-group-item-warning">{{title}}</a> 
 		{{/each}}
 	</div>
+	<hr>
 </main>
