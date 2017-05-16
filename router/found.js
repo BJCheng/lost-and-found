@@ -24,7 +24,7 @@ router.post("/:id", (req, res) => {
     req.checkBody('comment', 'comment is empty').notEmpty();
         let errors = req.validationErrors();
     if (errors) {
-        res.render('found-detail', { errors: errors });
+        res.redirect("/found/" + req.params.id);
     } else {
         var commentorId = req.user._id;
         var now = new Date();
