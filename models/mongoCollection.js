@@ -11,8 +11,7 @@ function getCollection(collectionName) {
         return db.collection(collectionName);
     }).catch((err) => {
         console.log(err);
-        return err;
-        // res.render('error', {error:err});
+        throw err;
     });
 }
 

@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     res.render('register');
 });
 router.post('/', (req, res) => {
-    res.send(JSON.stringify(req.body));
+    // res.send(JSON.stringify(req.body));
     req.checkBody('name', 'User name is empty.').notEmpty();
     req.checkBody('phone', 'Mobile phone number is empty.').notEmpty();
     req.checkBody('phone', 'Mobile phone number has wrong format.').isMobilePhone('en-US');
@@ -27,12 +27,13 @@ router.post('/', (req, res) => {
             'pwd': req.body.password,
         };
         user.insertOne(info).then((result) => {
-            if (result.ok < 1) throw (insertResult)
+            if (result.ok < 1) 
+                throw (insertResult)
             req.flash('success_msg', 'You Are Now Registered');
-            res.redirect('login');  //用render會沒有flash message
+            return res.redirect('login');  //用render會沒有flash message
         }).catch((err) => {
-            req.flash('err_msg', 'Register faild because: ' + err);
-            res.redirect('register');  //用render會沒有flash message
+            req.flash('err_msg', 'Registeration faild because: ' + err);
+            return res.redirect('register');  //用render會沒有flash message
         });
     }
 });

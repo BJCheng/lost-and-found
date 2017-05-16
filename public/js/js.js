@@ -5,6 +5,9 @@ $(function(){
 
         if(tabName.toUpperCase() === pageName.toUpperCase()){
             $(this).toggleClass('active', !$(this).hasClass('active'));
+        } else{
+            if(tabName.toUpperCase === 'HOME')
+                $(this).addClass('active');
         }
         // {
         //     $(this).addClass('active');
